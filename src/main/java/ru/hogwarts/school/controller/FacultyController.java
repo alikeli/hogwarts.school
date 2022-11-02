@@ -32,11 +32,11 @@ public class FacultyController {
 
     @PutMapping("{id}")
     public ResponseEntity<Faculty> editFaculty(@PathVariable Long id, @RequestBody Faculty faculty) {
-        Faculty faculty1 = facultyService.editFaculty(id, faculty);
-        if (faculty1 == null) {
+        Faculty foundFaculty = facultyService.editFaculty(id, faculty);
+        if (foundFaculty == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-        return ResponseEntity.ok(faculty1);
+        return ResponseEntity.ok(foundFaculty);
     }
 
     @DeleteMapping("{id}")
