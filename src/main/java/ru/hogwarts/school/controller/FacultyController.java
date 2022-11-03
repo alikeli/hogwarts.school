@@ -1,4 +1,5 @@
 package ru.hogwarts.school.controller;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -51,9 +52,9 @@ public class FacultyController {
 
     @GetMapping
 
-    public ResponseEntity<Collection<Faculty>> getFacultyByColor(@RequestParam (required = false) String color) {
+    public ResponseEntity<Collection<Faculty>> getFacultyByColor(@RequestParam(required = false) String color) {
         if (color != null && !color.isBlank()) {
-            return  ResponseEntity.ok(facultyService.getFacultyByColor(color));
+            return ResponseEntity.ok(facultyService.getFacultyByColor(color));
         }
         return ResponseEntity.ok(Collections.emptyList());
     }

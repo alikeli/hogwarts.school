@@ -48,11 +48,12 @@ public class StudentController {
         studentService.removeStudent(id);
         return ResponseEntity.ok().build();
     }
+
     @GetMapping
-    public ResponseEntity<Collection<Student>> getStudentByAge(@RequestParam (required = false) Integer age) {
-       if (age > 0) {
-           return  ResponseEntity.ok(studentService.getStudentByAge(age));
-       }
-       return ResponseEntity.ok(Collections.emptyList());
+    public ResponseEntity<Collection<Student>> getStudentByAge(@RequestParam(required = false) Integer age) {
+        if (age > 0) {
+            return ResponseEntity.ok(studentService.getStudentByAge(age));
+        }
+        return ResponseEntity.ok(Collections.emptyList());
     }
 }
