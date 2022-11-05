@@ -3,11 +3,11 @@ package ru.hogwarts.school.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
 
 import java.util.Collection;
-import java.util.Collections;
 
 @RestController
 @RequestMapping("/student")
@@ -48,20 +48,26 @@ public class StudentController {
         return ResponseEntity.ok().build();
     }
 
-//    @GetMapping
-//    public ResponseEntity<Collection<Student>> getStudentByAge(@RequestParam(required = false) Integer age) {
-//        if (age > 0) {
-//            return ResponseEntity.ok(studentService.getStudentByAge(age));
-//        }
-//        return ResponseEntity.ok(Collections.emptyList());
-//    }
 
     @GetMapping
-    public ResponseEntity<Collection<Student>> getStudentsByAgeBetween(@RequestParam Integer min,
-                                                                       @RequestParam  Integer max) {
-        if (min < 0 || max < min) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    public ResponseEntity<Collection<Student>> getStudentByAgeBetween(@RequestParam(required = false) Integer min,
+                                                                      @RequestParam(required = false) Integer max) {
+        if (min > 0 || max > min) {
+            return ResponseEntity.ok(studentService.getStudentsByAgeBetween(min, max));
         }
-        return ResponseEntity.ok(studentService.getStudentsByAgeBetween(min, max));
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+
     }
+
+    @GetMapping("{faculty_id}")
+    public ResponseEntity<Collection<Student>> getStudentsByFaculty(@PathVariable Faculty faculty_id) {
+        if (faculty_id != null) {
+            return ResponseEntity.ok(studentService.getStudentsByFaculty(faculty_id));
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+
+    }
+
+
 }
