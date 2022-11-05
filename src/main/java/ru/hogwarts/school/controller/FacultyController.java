@@ -51,9 +51,13 @@ public class FacultyController {
 
     @GetMapping
 
-    public ResponseEntity<Collection<Faculty>> getFacultyByColor(@RequestParam(required = false) String color) {
+    public ResponseEntity<Collection<Faculty>> getFacultyByNameOrColorIgnoreCase(@RequestParam(required = false) String color,
+                                                                                 @RequestParam(required = false) String name) {
         if (color != null && !color.isBlank()) {
-            return ResponseEntity.ok(facultyService.getFacultyByColor(color));
+            return ResponseEntity.ok(facultyService.getFacultyByColorIgnoreCase(color));
+        }
+        if (name != null && !name.isBlank()) {
+            return ResponseEntity.ok(facultyService.getFacultyByNameIgnoreCase(name));
         }
         return ResponseEntity.ok(Collections.emptyList());
     }
