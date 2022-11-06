@@ -40,7 +40,7 @@ public class FacultyService {
     public List<Faculty> getFacultyByColorIgnoreCase(String color) {
         return facultyRepository.getFacultyByColorIgnoreCase(color);
     }
-    public Collection<Student> getStudentsByFaculty(Faculty faculty_id) {
-        return facultyRepository.getStudentsByFaculty(faculty_id);
+    public Collection<Student> getStudentsByFaculty(Long faculty_id) {
+        return findFacultyById(faculty_id).getStudents();
     }
 }

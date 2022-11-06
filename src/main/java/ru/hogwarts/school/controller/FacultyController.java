@@ -62,12 +62,9 @@ public class FacultyController {
         }
         return ResponseEntity.ok(Collections.emptyList());
     }
-    @GetMapping("{faculty_id}")
-    public ResponseEntity<Collection<Student>> getStudentsByFaculty(@PathVariable Faculty faculty_id) {
-        if (faculty_id != null) {
-            return ResponseEntity.ok(facultyService.getStudentsByFaculty(faculty_id));
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    @GetMapping("/getStudents")
+    public Collection<Student> getStudentsByFaculty(@RequestParam Long faculty_id) {
+                return facultyService.getStudentsByFaculty(faculty_id);
 
     }
 

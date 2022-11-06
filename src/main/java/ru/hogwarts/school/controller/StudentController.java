@@ -59,12 +59,10 @@ public class StudentController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 
     }
-//    @GetMapping("/facultyOfStudent")
-//    public Faculty getNumberFacultyOfStudent(@RequestParam Long id) {
-//        return studentService.getNumberFacultyOfStudent(id);
-//    }
-
-
+    @GetMapping("/facultyOfStudent")
+    public Faculty getNumberFacultyOfStudent(@RequestParam Long id) {
+        return studentService.getFacultyOfStudent(id);
+    }
 
 
 }
