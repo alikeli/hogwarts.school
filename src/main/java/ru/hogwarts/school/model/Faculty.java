@@ -21,10 +21,11 @@ public class Faculty {
     public Faculty() {
     }
 
-    public Faculty(Long id, String name, String color) {
+    public Faculty(Long id, String name, String color, Collection<Student> students) {
         this.id = id;
         this.name = name;
         this.color = color;
+        this.students = students;
     }
 
     public Long getId() {
@@ -62,5 +63,13 @@ public class Faculty {
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getName(), getColor());
+    }
+
+    public Collection<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Collection<Student> students) {
+        this.students = students;
     }
 }

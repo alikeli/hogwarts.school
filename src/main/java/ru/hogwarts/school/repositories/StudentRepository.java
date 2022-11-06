@@ -9,7 +9,6 @@ import java.util.List;
 public interface StudentRepository extends JpaRepository<Student, Long> {
     List<Student> getStudentsByAgeBetween(Integer min, Integer max);
 
-    List<Student> getStudentsByFaculty(Faculty faculty_id);
-
+   // Faculty getNumberFacultyOfStudent(Long id);
 
 }
