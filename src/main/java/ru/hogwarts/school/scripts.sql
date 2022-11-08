@@ -28,4 +28,4 @@ select student.name
 from student as s,
      faculty as f
 where s.faculty_id = f.id
-  and f.name = 'Слизерин';
+  and f.name = 'Гриффиндор';

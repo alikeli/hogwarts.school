@@ -20,6 +20,7 @@ public class StudentController {
     }
 
     @GetMapping("{id}")
+
     public ResponseEntity<Student> getStudent(@PathVariable Long id) {
         Student student = studentService.findStudent(id);
         if (student == null) {
@@ -59,9 +60,20 @@ public class StudentController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 
     }
-    @GetMapping("/facultyOfStudent")
-    public Faculty getNumberFacultyOfStudent(@RequestParam Long id) {
-        return studentService.getFacultyOfStudent(id);
+
+    @GetMapping("studentsByFaculty")
+    public Collection<Student> getStudentByFaculty(@RequestParam Long facultyId) {
+        return studentService.getStudentByFacultyId(facultyId);
+    }
+
+    @GetMapping("all")
+    public Collection<Student> allStudent() {
+        return studentService.allStudent();
+    }
+
+    @GetMapping("facultyOfStudent")
+    public Faculty getFacultyOfStudent(@RequestParam Long studentId) {
+        return studentService.getFacultyOfStudent(studentId);
     }
 
 
