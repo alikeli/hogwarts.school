@@ -9,6 +9,7 @@ import ru.hogwarts.school.model.Student;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 import static org.apache.catalina.security.SecurityUtil.remove;
 
@@ -49,12 +50,9 @@ public class FacultyService {
     }
 
     public Collection<Faculty> getFacultyByColor(String color) {
-        ArrayList<Faculty> result = new ArrayList<>();
-        for (Faculty faculty : faculties.values()) {
-            if (faculty.getColor() == color) {
-                result.add(faculty);
-            }
-        }
-        return result;
+        return faculties.values().stream()
+                .filter(student -> student.getColor() == color)
+                .collect(Collectors.toList());
+
     }
 }
