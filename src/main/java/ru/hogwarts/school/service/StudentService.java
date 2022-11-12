@@ -2,8 +2,8 @@ package ru.hogwarts.school.service;
 
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.component.RecordMapper;
-import ru.hogwarts.school.exception.StudentNotFoundException;
 import ru.hogwarts.school.entity.Student;
+import ru.hogwarts.school.exception.StudentNotFoundException;
 import ru.hogwarts.school.record.StudentRecord;
 import ru.hogwarts.school.repository.StudentRepository;
 
@@ -15,7 +15,8 @@ public class StudentService {
     private final StudentRepository studentRepository;
     private final RecordMapper recordMapper;
 
-    public StudentService(StudentRepository studentRepository, RecordMapper recordMapper) {
+    public StudentService(StudentRepository studentRepository,
+                          RecordMapper recordMapper) {
         this.studentRepository = studentRepository;
         this.recordMapper = recordMapper;
     }
@@ -29,14 +30,14 @@ public class StudentService {
     }
 
     public StudentRecord editStudent(long id, StudentRecord studentRecord) {
-        Student oldStudent = studentRepository.findById(id).orElseThrow(() -> new StudentNotFoundException());
+        Student oldStudent = studentRepository.findById(id).orElseThrow(() -> new StudentNotFoundException(id));
         oldStudent.setAge(studentRecord.getAge());
         oldStudent.setName(studentRecord.getName());
         return recordMapper.toRecord(studentRepository.save(oldStudent));
     }
 
     public StudentRecord removeStudent(Long id) {
-        Student student = studentRepository.findById(id).orElseThrow(() -> new StudentNotFoundException());
+        Student student = studentRepository.findById(id).orElseThrow(() -> new StudentNotFoundException(id));
         studentRepository.delete(student);
         return recordMapper.toRecord(student);
     }
