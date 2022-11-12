@@ -53,4 +53,10 @@ public class FacultyService {
                 .collect(Collectors.toList());
 
     }
+
+    public Collection<FacultyRecord> findAllByColorOrName(String colorOrName) {
+        return facultyRepository.findAllByColorIgnoreCaseOrNameIgnoreCase(colorOrName, colorOrName).stream()
+                .map(recordMapper::toRecord)
+                .collect(Collectors.toList());
+    }
 }

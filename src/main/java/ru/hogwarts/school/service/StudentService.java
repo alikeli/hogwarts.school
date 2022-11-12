@@ -50,4 +50,10 @@ public class StudentService {
 
 
     }
+
+    public Collection<StudentRecord> findAllByAgeBetween(Integer minAge, Integer maxAge) {
+        return studentRepository.findByAgeBetween(minAge, maxAge).stream()
+                .map(recordMapper::toRecord)
+                .collect(Collectors.toList());
+    }
 }
