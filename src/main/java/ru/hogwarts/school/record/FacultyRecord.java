@@ -5,9 +5,9 @@ import javax.validation.constraints.NotBlank;
 public class FacultyRecord {
     private Long id;
     @NotBlank(message = "Название факультета должно быть заполнено!")
-    private  String name;
+    private String name;
     @NotBlank(message = "Цвет факультета должен быть заполнен!")
-    private  String color;
+    private String color;
 
     public Long getId() {
         return id;

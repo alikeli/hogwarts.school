@@ -12,6 +12,9 @@ public class RecordMapper {
         studentRecord.setId(student.getId());
         studentRecord.setName(student.getName());
         studentRecord.setAge(student.getAge());
+        if (student.getFaculty() != null) {
+            studentRecord.setFaculty(toRecord(student.getFaculty()));
+        }
         return studentRecord;
 
     }
@@ -21,6 +24,7 @@ public class RecordMapper {
         facultyRecord.setId(faculty.getId());
         facultyRecord.setName(faculty.getName());
         facultyRecord.setColor(faculty.getColor());
+
         return facultyRecord;
 
     }
@@ -30,6 +34,9 @@ public class RecordMapper {
         student.setId(studentRecord.getId());
         student.setName(studentRecord.getName());
         student.setAge(studentRecord.getAge());
+        if (studentRecord.getFaculty() != null) {
+            student.setFaculty(toEntity(studentRecord.getFaculty()));
+        }
         return student;
 
     }

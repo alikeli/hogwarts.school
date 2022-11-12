@@ -2,27 +2,41 @@ package ru.hogwarts.school.service;
 
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.component.RecordMapper;
+import ru.hogwarts.school.entity.Faculty;
 import ru.hogwarts.school.entity.Student;
+import ru.hogwarts.school.exception.FacultyNotFoundException;
 import ru.hogwarts.school.exception.StudentNotFoundException;
+import ru.hogwarts.school.record.FacultyRecord;
 import ru.hogwarts.school.record.StudentRecord;
+import ru.hogwarts.school.repository.FacultyRepository;
 import ru.hogwarts.school.repository.StudentRepository;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
     private final StudentRepository studentRepository;
     private final RecordMapper recordMapper;
+    private final FacultyRepository facultyRepository;
 
     public StudentService(StudentRepository studentRepository,
-                          RecordMapper recordMapper) {
+                          RecordMapper recordMapper, FacultyRepository facultyRepository) {
         this.studentRepository = studentRepository;
         this.recordMapper = recordMapper;
+        this.facultyRepository = facultyRepository;
     }
 
     public StudentRecord addStudent(StudentRecord studentRecord) {
-        return recordMapper.toRecord(studentRepository.save(recordMapper.toEntity(studentRecord)));
+        Student student = recordMapper.toEntity(studentRecord);
+        Faculty faculty = Optional.ofNullable(studentRecord.getFaculty())
+                .map(FacultyRecord::getId)
+                        .flatMap(facultyRepository::findById)
+                                .orElse(null);
+
+        student.setFaculty(faculty);
+        return recordMapper.toRecord(studentRepository.save(student));
     }
 
     public StudentRecord findStudent(Long id) {
@@ -52,7 +66,7 @@ public class StudentService {
     }
 
     public Collection<StudentRecord> findAllByAgeBetween(Integer minAge, Integer maxAge) {
-        return studentRepository.findByAgeBetween(minAge, maxAge).stream()
+        return studentRepository.findAllByAgeBetween(minAge, maxAge).stream()
                 .map(recordMapper::toRecord)
                 .collect(Collectors.toList());
     }
