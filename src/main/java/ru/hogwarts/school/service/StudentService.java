@@ -3,12 +3,11 @@ package ru.hogwarts.school.service;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.component.RecordMapper;
 import ru.hogwarts.school.exception.StudentNotFoundException;
-import ru.hogwarts.school.controller.entity.Student;
+import ru.hogwarts.school.entity.Student;
 import ru.hogwarts.school.record.StudentRecord;
 import ru.hogwarts.school.repository.StudentRepository;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.stream.Collectors;
 
 @Service

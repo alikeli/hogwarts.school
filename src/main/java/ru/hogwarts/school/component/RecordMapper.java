@@ -1,8 +1,8 @@
 package ru.hogwarts.school.component;
 
 import org.springframework.stereotype.Component;
-import ru.hogwarts.school.controller.entity.Faculty;
-import ru.hogwarts.school.controller.entity.Student;
+import ru.hogwarts.school.entity.Faculty;
+import ru.hogwarts.school.entity.Student;
 import ru.hogwarts.school.record.FacultyRecord;
 import ru.hogwarts.school.record.StudentRecord;
 @Component
