@@ -12,6 +12,7 @@ public class Student {
    @ManyToOne
    private Faculty faculty;
 
+
     public Faculty getFaculty() {
         return faculty;
     }
