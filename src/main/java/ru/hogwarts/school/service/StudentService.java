@@ -47,6 +47,12 @@ public class StudentService {
         Student oldStudent = studentRepository.findById(id).orElseThrow(() -> new StudentNotFoundException(id));
         oldStudent.setAge(studentRecord.getAge());
         oldStudent.setName(studentRecord.getName());
+        oldStudent.setFaculty(
+                Optional.ofNullable(studentRecord.getFaculty())
+                        .map(FacultyRecord::getId)
+                        .flatMap(facultyRepository::findById)
+                        .orElseThrow(null)
+        );
         return recordMapper.toRecord(studentRepository.save(oldStudent));
     }
 
@@ -69,5 +75,9 @@ public class StudentService {
         return studentRepository.findAllByAgeBetween(minAge, maxAge).stream()
                 .map(recordMapper::toRecord)
                 .collect(Collectors.toList());
+    }
+
+    public FacultyRecord findFacultyByStudent(long id) {
+        return findStudent(id).getFaculty();
     }
 }
