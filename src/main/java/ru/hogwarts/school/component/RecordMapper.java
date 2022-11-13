@@ -35,7 +35,7 @@ public class RecordMapper {
         AvatarRecord avatarRecord = new AvatarRecord();
         avatarRecord.setId(avatarRecord.getId());
         avatarRecord.setMediaType(avatarRecord.getMediaType());
-        avatarRecord.setUrl(avatarRecord.getUrl());
+      //  avatarRecord.setUrl(avatarRecord.getUrl());
         return avatarRecord;
     }
 
