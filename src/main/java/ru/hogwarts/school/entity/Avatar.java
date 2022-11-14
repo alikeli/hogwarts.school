@@ -1,11 +1,13 @@
 package ru.hogwarts.school.entity;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Objects;
 
 @Entity
-@Table("avatar")
+@Table(name = "avatar")
 public class Avatar {
 
     @Id
@@ -14,6 +16,8 @@ public class Avatar {
     private String filePath;
     private long fileSize;
     private String mediaType;
+    @Lob
+    @Type(type = "org.hibernate.type.BinaryType")
     private byte[] data;
     @OneToOne
     private Student student;

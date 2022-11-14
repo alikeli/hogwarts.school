@@ -77,7 +77,22 @@ public class StudentService {
                 .collect(Collectors.toList());
     }
 
-    public FacultyRecord findFacultyByStudent(long id) {
-        return findStudent(id).getFaculty();
+    public FacultyRecord getFacultyByStudentId(long id){
+        Faculty faculty = studentRepository.findById(id).orElseThrow(()-> new StudentNotFoundException(id)).getFaculty();
+        return recordMapper.toRecord(faculty);
+    }
+
+    public Integer getStudentCount() {
+        return studentRepository.getStudentsCount();
+    }
+
+    public Double getStudentsAverageAge() {
+        return studentRepository.getStudentsAverageAge();
+    }
+
+    public Collection<StudentRecord> getLastFiveStudents() {
+        return studentRepository.findLastFiveStudents().stream()
+                .map(recordMapper::toRecord)
+                .collect(Collectors.toList());
     }
 }

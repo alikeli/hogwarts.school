@@ -11,4 +11,4 @@ public class AvatarNotFoundException extends RuntimeException {
         return id;
     }
 }
-}
+

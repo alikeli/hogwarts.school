@@ -33,9 +33,9 @@ public class RecordMapper {
 
     public AvatarRecord toRecord(Avatar avatar) {
         AvatarRecord avatarRecord = new AvatarRecord();
-        avatarRecord.setId(avatarRecord.getId());
-        avatarRecord.setMediaType(avatarRecord.getMediaType());
-      //  avatarRecord.setUrl(avatarRecord.getUrl());
+        avatarRecord.setId(avatar.getId());
+        avatarRecord.setMediaType(avatar.getMediaType());
+        avatarRecord.setUrl("http://localhost:8080/avatar/" + avatar.getId() + "/from-db");
         return avatarRecord;
     }
 
