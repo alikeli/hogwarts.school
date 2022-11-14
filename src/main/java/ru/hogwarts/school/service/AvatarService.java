@@ -75,37 +75,6 @@ public class AvatarService {
                 .collect(Collectors.toList());
     }
 
-//    public AvatarRecord addAvatar(MultipartFile multipartFile, Long studentId) throws IOException {
-//        Student student = studentRepository.findById(studentId).orElseThrow(() -> new StudentNotFoundException(studentId));
-//        byte[] data = multipartFile.getBytes();
-//
-//        String extension = Optional.ofNullable(multipartFile.getOriginalFilename())
-//                .map(fileName -> fileName.substring(multipartFile.getOriginalFilename().lastIndexOf(".")))
-//                .orElse("");
-//        Path path = Paths.get(avatarDir).resolve(studentId + extension);
-//        Files.write(path, data);
-//
-//        Avatar avatar = new Avatar();
-//        avatar.setData(data);
-//        avatar.setFileSize(data.length);
-//        avatar.setMediaType(multipartFile.getContentType());
-//        avatar.setStudent(student);
-//        avatar.setFilePath(path.toString());
-//
-//        return recordMapper.toRecord(avatarRepository.save(avatar));
-//
-//    }
-//
-//    public Pair<byte[], String> findFromDb(Long id) throws IOException  {
-//        Avatar avatar = avatarRepository.findById(id).orElseThrow(()-> new AvatarNotFoundException(id));
-//        return Pair.of(avatar.getData(), avatar.getMediaType());
-//
-//    }
-//    public Pair<byte[], String> findFromFs(Long id) throws IOException {
-//        Avatar avatar = avatarRepository.findById(id).orElseThrow(()-> new AvatarNotFoundException(id));
-//
-//        return Pair.of(Files.readAllBytes(Paths.get(avatar.getFilePath())), avatar.getMediaType());
-//
-//    }
+
 }
 
