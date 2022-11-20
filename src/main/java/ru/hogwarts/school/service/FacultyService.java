@@ -3,7 +3,7 @@ package ru.hogwarts.school.service;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.component.RecordMapper;
 import ru.hogwarts.school.exception.FacultyNotFoundException;
-import ru.hogwarts.school.entity.Faculty;
+import ru.hogwarts.school.controller.entity.Faculty;
 import ru.hogwarts.school.record.FacultyRecord;
 import ru.hogwarts.school.record.StudentRecord;
 import ru.hogwarts.school.repository.FacultyRepository;
