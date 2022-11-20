@@ -1,4 +1,4 @@
-package ru.hogwarts.school.controller.entity;
+package ru.hogwarts.school.entity;
 
 import javax.persistence.*;
 import java.util.Objects;
