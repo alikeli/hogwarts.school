@@ -1,4 +1,4 @@
-package ru.hogwarts.school.entity;
+package ru.hogwarts.school.controller.entity;
 
 import org.hibernate.annotations.Type;
 
