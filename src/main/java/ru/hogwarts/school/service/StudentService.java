@@ -21,7 +21,7 @@ public class StudentService {
     private final StudentRepository studentRepository;
     private final RecordMapper recordMapper;
     private final FacultyRepository facultyRepository;
-    private final Logger LOG = LoggerFactory.getLogger(StudentService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(StudentService.class);
 
     public StudentService(StudentRepository studentRepository,
                           RecordMapper recordMapper, FacultyRepository facultyRepository) {
