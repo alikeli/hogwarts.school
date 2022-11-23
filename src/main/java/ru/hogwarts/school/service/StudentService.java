@@ -13,8 +13,10 @@ import ru.hogwarts.school.repository.FacultyRepository;
 import ru.hogwarts.school.repository.StudentRepository;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class StudentService {
@@ -121,4 +123,22 @@ public class StudentService {
                 .map(recordMapper::toRecord)
                 .collect(Collectors.toList());
     }
+
+    public Collection<String> findStudentsWithNameStartedA() {
+        return studentRepository.findAll().stream()
+                .map(Student::getName)
+                .map(String::toUpperCase)
+                .filter(s->s.startsWith("A"))
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    public double findStudentAverageAge() {
+        return studentRepository.findAll().stream()
+                .mapToDouble(Student::getAge)
+                .average()
+                .orElse( 0);
+
+    }
+
 }

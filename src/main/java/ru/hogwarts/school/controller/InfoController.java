@@ -18,5 +18,15 @@ public class InfoController {
         return ResponseEntity.ok(infoService.getPort());
     }
 
+    @GetMapping("/stream")
+    public Long testStream() {
+        return infoService.testStream();
+    }
+
+    @GetMapping("/stream2")
+    public Long testStreamParallel() {
+        return infoService.testStreamParallel();
+    }
+
 
 }
