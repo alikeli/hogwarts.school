@@ -2,6 +2,7 @@ package ru.hogwarts.school.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.component.RecordMapper;
 import ru.hogwarts.school.entity.Faculty;
@@ -16,7 +17,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class StudentService {
@@ -74,8 +74,9 @@ public class StudentService {
     public StudentRecord removeStudent(Long id) {
         LOG.debug("was invoking method removeStudent");
         Student student = studentRepository.findById(id).orElseThrow(() ->
-        {LOG.error("There is not student with id = " + id);
-           throw  new StudentNotFoundException(id);
+        {
+            LOG.error("There is not student with id = " + id);
+            throw new StudentNotFoundException(id);
         });
         studentRepository.delete(student);
         return recordMapper.toRecord(student);
@@ -100,7 +101,7 @@ public class StudentService {
 
     public FacultyRecord getFacultyByStudentId(long id) {
         LOG.debug("was invoking method getFacultyByStudentId");
-        Faculty faculty = studentRepository.findById(id).orElseThrow(() ->{
+        Faculty faculty = studentRepository.findById(id).orElseThrow(() -> {
             LOG.error("There is not student with id = " + id);
             throw new StudentNotFoundException(id);
         }).getFaculty();
@@ -128,7 +129,7 @@ public class StudentService {
         return studentRepository.findAll().stream()
                 .map(Student::getName)
                 .map(String::toUpperCase)
-                .filter(s->s.startsWith("A"))
+                .filter(s -> s.startsWith("A"))
                 .sorted()
                 .collect(Collectors.toList());
     }
@@ -137,8 +138,37 @@ public class StudentService {
         return studentRepository.findAll().stream()
                 .mapToDouble(Student::getAge)
                 .average()
-                .orElse( 0);
+                .orElse(0);
 
+    }
+
+    public void multiThread() {
+        LOG.debug("was invoking method multiThreadMethod");
+        List<Student> students = studentRepository.findAll(PageRequest.of(0, 6)).getContent();
+
+        printNamesWithoutSynchronized(students.subList(0, 2));
+
+        new Thread(() -> printNamesWithoutSynchronized(students.subList(2, 4))).start();
+        new Thread(() -> printNamesWithoutSynchronized(students.subList(4, 6))).start();
+
+
+    }
+
+    private void printNamesWithoutSynchronized(List<Student> students) {
+        students.forEach(s -> LOG.info(s.getName()));
+    }
+
+    public void multiThreadSecond() {
+        LOG.debug("was invoking method multiThreadMethod2");
+        List<Student> students = studentRepository.findAll(PageRequest.of(0, 6)).getContent();
+
+        printNames(students.subList(0, 2));
+        new Thread(() -> printNames(students.subList(2, 4))).start();
+        new Thread(() -> printNames(students.subList(4, 6))).start();
+    }
+
+    private synchronized void printNames(List<Student> students) {
+        students.forEach(s -> LOG.info(s.getName()));
     }
 
 }
