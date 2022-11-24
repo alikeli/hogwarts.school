@@ -81,4 +81,17 @@ public class StudentController {
         return ResponseEntity.ok(studentService.findStudentAverageAge());
     }
 
+    @GetMapping("/endpoint")
+    public ResponseEntity<Void> printNames(){
+        studentService.multiThread();
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/endpoint-2")
+    public ResponseEntity<Void> printNames2(){
+        studentService.multiThreadSecond();
+        return ResponseEntity.ok().build();
+    }
+
+
 }

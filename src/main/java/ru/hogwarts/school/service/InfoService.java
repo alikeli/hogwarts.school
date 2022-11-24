@@ -28,7 +28,7 @@ public class InfoService {
                 .reduce(0L, Long::sum);
         long finish = System.currentTimeMillis();
         long time = finish - start;
-        LOG.debug("time" + time);
+        LOG.debug("time = " +  time);
         return sum;
     }
 
@@ -42,7 +42,7 @@ public class InfoService {
 
         long finish = System.currentTimeMillis();
         long time = finish - start;
-        LOG.debug("time" + time);
+        LOG.debug("time = " + time);
         return sum;
     }
 }
